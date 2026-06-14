@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <!-- Custom CSS Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
@@ -107,7 +107,7 @@
                 <div class="dual-upload-header">
                     <i class="fa-solid fa-file-invoice-dollar" style="font-size:2rem; color: var(--primary);"></i>
                     <h2>رفع ملفات مسير الرواتب</h2>
-                    <p style="color: var(--text-muted);">قم برفع ملفي المرتبات والمؤثرات بشكل منفصل، ثم اضغط دمج لإنشاء المسير الموحد</p>
+                    <p style="color: var(--text-muted);">قم برفع ملفي المرتبات والمؤثرات بشكل منفصل، ثم اضغط دمج لإنشاء المسير الموح...</p>
                 </div>
 
                 <div class="dual-upload-grid">
@@ -350,7 +350,7 @@
             <section id="reportsTab" class="tab-content">
                 <div class="reports-header" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
                     <div>
-                        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main);"><i class="fa-solid fa-file-invoice-dollar" style="color: var(--primary); margin-left: 8px;"></i> التقارير والتحليلات المالية</h2>
+                        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main);"><i class="fa-solid fa-file-invoice-dollar" style="color: var(--primary); margin-left: 8px;"></i> تقرير شامل</h2>
                         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">عرض ملخص مسيرات الرواتب والمؤشرات الحسابية للمنشأة</p>
                     </div>
                     <div>
@@ -366,7 +366,7 @@
                     <!-- Total Employees -->
                     <div class="kpi-card blue" style="cursor: pointer;">
                         <div class="kpi-info">
-                            <h3>إجمالي الموظفين</h3>
+                            <h3>إجمالي ��لموظفين</h3>
                             <div class="kpi-value" id="reportMetricEmployeeCount">0</div>
                         </div>
                         <div class="kpi-icon">
@@ -420,103 +420,42 @@
                 </div>
 
                 <!-- Additional reports breakdown / analytics -->
-                <div class="charts-grid" style="margin-top: 12px;">
-                    <div class="chart-card" style="grid-column: span 2;">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2>ملخص الأقسام والرواتب الإجمالية</h2>
-                            </div>
-                        </div>
-                        <div class="table-container" style="margin-top: 16px;">
-                            <table class="custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>القسم / الإدارة</th>
-                                        <th>عدد الموظفين</th>
-                                        <th>إجمالي الأساسي (SAR)</th>
-                                        <th>إجمالي البدلات (SAR)</th>
-                                        <th>إجمالي الاستقطاعات (SAR)</th>
-                                        <th>صافي الرواتب (SAR)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="reportDepartmentSummaryBody">
-                                    <!-- Dynamic rows loaded here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <div class="charts-grid" style="margin-top: 12px;"><div class="chart-card" style="grid-column: span 2;"><div class="chart-header"><div class="chart-title"><h2>ملخص الأقسام والرواتب الإجمالية</h2></div></div><div class="table-container" style="margin-top: 16px;"><table class="custom-table"><thead><tr><th>القسم / الإدارة</th><th>عدد الموظفين</th><th>إجمالي الأساسي (SAR)</th><th>إجمالي البدلات (SAR)</th><th>إجمالي الاستقطاعات (SAR)</th><th>صافي الرواتب (SAR)</th></tr></thead><tbody id="reportDepartmentSummaryBody"></tbody></table></div></div></div>
             </section>
 
             <!-- Calculation Rules Tab -->
             <section id="rulesTab" class="tab-content">
                 <div class="rules-container">
                     <div class="rule-card">
-                        <h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-gears" style="color: var(--primary);"></i> إعدادات احتساب الرواتب التلقائية</h2>
+                        <h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-gears" style="color: var(--primary);"></i> إعدادات الحساب</h2>
                         
                         <form id="rulesSettingsForm" style="display: flex; flex-direction: column; gap: 16px;">
-                            <div class="rule-row">
-                                <label for="calcGosiCheck">احتساب التأمينات الاجتماعية GOSI تلقائياً</label>
-                                <input type="checkbox" id="calcGosiCheck" style="width: 20px; height: 20px; cursor: pointer;">
-                            </div>
+                            <div class="rule-row"><label for="calcGosiCheck">احتساب التأمينات الاجتماعية GOSI تلقائياً</label><input type="checkbox" id="calcGosiCheck" style="width: 20px; height: 20px; cursor: pointer;"></div>
                             
-                            <div class="rule-row">
-                                <label for="gosiRateInput">نسبة استقطاع التأمينات (٪ من الأساسي)</label>
-                                <input type="number" id="gosiRateInput" class="input-field" style="width: 120px;" min="0" max="100" step="0.1" value="9">
-                            </div>
+                            <div class="rule-row"><label for="gosiRateInput">نسبة استقطاع التأمينات (٪ من الأساسي)</label><input type="number" id="gosiRateInput" class="input-field" style="width: 120px;" min="0" max="100" step="0.1" value="9"></div>
 
-                            <div class="rule-row" style="border-top: 1px solid var(--border-color); padding-top: 15px;">
-                                <label for="calcTaxCheck">احتساب الضرائب تلقائياً</label>
-                                <input type="checkbox" id="calcTaxCheck" style="width: 20px; height: 20px; cursor: pointer;">
-                            </div>
+                            <div class="rule-row" style="border-top: 1px solid var(--border-color); padding-top: 15px;"><label for="calcTaxCheck">احتساب الضرائب تلقائياً</label><input type="checkbox" id="calcTaxCheck" style="width: 20px; height: 20px; cursor: pointer;"></div>
 
-                            <div class="rule-row">
-                                <label for="taxRateInput">نسبة ضريبة الدخل والرسوم (٪ من الأساسي)</label>
-                                <input type="number" id="taxRateInput" class="input-field" style="width: 120px;" min="0" max="100" step="0.1" value="5">
-                            </div>
+                            <div class="rule-row"><label for="taxRateInput">نسبة ضريبة الدخل والرسوم (٪ من الأساسي)</label><input type="number" id="taxRateInput" class="input-field" style="width: 120px;" min="0" max="100" step="0.1" value="5"></div>
 
-                            <div class="rule-row" style="border-top: 1px solid var(--border-color); padding-top: 15px;">
-                                <label for="allowanceMultInput">مضاعف/معامل البدلات (للإضافات الطارئة)</label>
-                                <input type="number" id="allowanceMultInput" class="input-field" style="width: 120px;" min="0" step="0.05" value="1.0">
-                            </div>
+                            <div class="rule-row" style="border-top: 1px solid var(--border-color); padding-top: 15px;"><label for="allowanceMultInput">مضاعف/معامل البدلات (للإضافات الطارئة)</label><input type="number" id="allowanceMultInput" class="input-field" style="width: 120px;" min="0" step="0.05" value="1.0"></div>
 
-                            <div class="rule-row">
-                                <label for="deductionMultInput">مضاعف/معامل الخصومات</label>
-                                <input type="number" id="deductionMultInput" class="input-field" style="width: 120px;" min="0" step="0.05" value="1.0">
-                            </div>
+                            <div class="rule-row"><label for="deductionMultInput">مضاعف/معامل الخصومات</label><input type="number" id="deductionMultInput" class="input-field" style="width: 120px;" min="0" step="0.05" value="1.0"></div>
 
-                            <div class="rule-row" style="border-top: 1px solid var(--border-color); padding-top: 15px;">
-                                <label for="overtimePerMinuteInput">
-                                    سعر دقيقة العمل الإضافي (ص/ الموظف) — ريال/دقيقة
-                                    <span style="font-size:0.78rem; color: var(--text-muted); display:block; margin-top:3px;">
-                                        0 = لا يتم احتساب العمل الإضافي نقدياً (افتراضي)
-                                    </span>
-                                </label>
-                                <input type="number" id="overtimePerMinuteInput" class="input-field" style="width: 120px;" min="0" step="0.01" value="0">
-                            </div>
+                            <div class="rule-row" style="border-top: 1px solid var(--border-color); padding-top: 15px;"><label for="overtimePerMinuteInput">سعر دقيقة العمل الإضافي (ص/ الموظف) — ريال/دقيقة<span style="font-size:0.78rem; color: var(--text-muted); display:block; margin-top:3px;">0 = لا يتم احتساب العمل الإضافي نقدياً (افتراضي)</span></label><input type="number" id="overtimePerMinuteInput" class="input-field" style="width: 120px;" min="0" step="0.01" value="0"></div>
 
-                            <div class="rule-row">
-                                <label for="lateDeductionPerMinuteInput">
-                                    سعر دقيقة التأخر/الغياب (ح/ الموظف) — ريال/دقيقة
-                                    <span style="font-size:0.78rem; color: var(--text-muted); display:block; margin-top:3px;">
-                                        0 = لا يتم خصم الحضور نقدياً (افتراضي)
-                                    </span>
-                                </label>
-                                <input type="number" id="lateDeductionPerMinuteInput" class="input-field" style="width: 120px;" min="0" step="0.01" value="0">
-                            </div>
+                            <div class="rule-row"><label for="lateDeductionPerMinuteInput">سعر دقيقة التأخر/الغياب (ح/ الموظف) — ريال/دقيقة<span style="font-size:0.78rem; color: var(--text-muted); display:block; margin-top:3px;">0 = لا يتم خصم الحضور نقدياً (افتراضي)</span></label><input type="number" id="lateDeductionPerMinuteInput" class="input-field" style="width: 120px;" min="0" step="0.01" value="0"></div>
 
                             <button type="submit" class="btn btn-primary" style="margin-top: 15px; align-self: flex-start;">حفظ وتطبيق القواعد</button>
                         </form>
                     </div>
 
                     <div class="rule-card">
-                        <h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-arrows-split-up-and-left" style="color: var(--secondary);"></i> إعدادات مطابقة أعمدة ملف الـ Excel</h2>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">يقوم النظام تلقائياً بتحديد الأعمدة المناسبة. يمكنك تعديل مطابقة الأعمدة يدوياً أدناه إذا لم يتم مطابقة العمود بشكل صحيح.</p>
+                        <h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-arrows-split-up-and-left" style="color: var(--secondary);"></i> مطابقة الأعمدة</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">يقوم النظام تلقائياً بتحديد الأعمدة المناسبة. يمكن تعديلها يدوياً هنا.</p>
                         
                         <form id="columnMappingsForm" style="display: flex; flex-direction: column; gap: 16px;">
-                            <div id="columnMappingsContainer" class="mapping-list">
-                                <!-- Populated dynamically -->
-                            </div>
+                            <div id="columnMappingsContainer" class="mapping-list"><!-- Populated dynamically --></div>
                             <button type="submit" class="btn btn-secondary" style="margin-top: 15px; align-self: flex-start;">تحديث مطابقة الأعمدة</button>
                         </form>
                     </div>
@@ -526,167 +465,39 @@
             <!-- AI Assistant Tab -->
             <section id="aiTab" class="tab-content">
                 <div class="chat-container-panel">
-                    <div class="chat-header-bar">
-                        <div class="chat-bot-avatar">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <div class="chat-bot-info">
-                            <h3>المساعد المالي الذكي</h3>
-                            <p>اطرح أي سؤال حول بيانات رواتب الموظفين، المتوسطات، أو الخصومات</p>
-                        </div>
-                        <button class="btn-icon" id="clearChatHistoryBtn" title="مسح سجل المحادثة" style="margin-right: auto; font-family: inherit;">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
+                    <div class="chat-header-bar"><div class="chat-bot-avatar"><i class="fa-solid fa-robot"></i></div><div class="chat-bot-info"><h3>المساعد المالي الذكي</h3><p>اطرح أي سؤال حول بيانات رواتب الموظفين، المتوسطات، أو الخصومات</p></div><button class="btn-icon" id="clearChatHistoryBtn" title="مسح سجل المحادثة" style="margin-right: auto; font-family: inherit;"><i class="fa-solid fa-trash-can"></i></button></div>
                     
-                    <div class="chat-messages" id="chatMessagesContainer">
-                        <div class="chat-msg bot">
-                            مرحباً بك! أنا مساعدك المالي الذكي. لقد قمت بتحليل كشف الرواتب المرفوع بنجاح. كيف يمكنني مساعدتك اليوم؟ يمكنك سؤالي عن إجمالي الرواتب، أعلى الموظفين راتباً، متوسط الرواتب بقسم معين، أو أي تحذيرات تم اكتشافها بالمسير المالي.
-                        </div>
-                    </div>
+                    <div class="chat-messages" id="chatMessagesContainer"><div class="chat-msg bot">مرحباً بك! أنا مساعدك المالي الذكي. لقد قمت بتحليل كشف الرواتب المرفوع بنجاح. كيف يمكنني مساعدتك؟</div></div>
 
-                    <div class="chat-suggestions">
-                        <button class="chat-suggest-btn" onclick="App.handleAIChatMessage('ما هو إجمالي الرواتب؟')">ما هو إجمالي الرواتب؟</button>
-                        <button class="chat-suggest-btn" onclick="App.handleAIChatMessage('من هو الموظف الأعلى راتباً؟')">من الموظف الأعلى راتباً؟</button>
-                        <button class="chat-suggest-btn" onclick="App.handleAIChatMessage('هل توجد أي أخطاء أو تحذيرات في حساب الرواتب؟')">أخطاء وتحذيرات الحسابات</button>
-                        <button class="chat-suggest-btn" onclick="App.handleAIChatMessage('كم عدد الموظفين في هذا المسير؟')">كم عدد الموظفين؟</button>
-                    </div>
+                    <div class="chat-suggestions"><button class="chat-suggest-btn" onclick="App.handleAIChatMessage('ما هو إجمالي الرواتب؟')">ما هو إجمالي الرواتب؟</button><button class="chat-suggest-btn" onclick="App.handleAIChatMessage('من هو الموظف الأعلى راتباً؟')">من الموظف الأعلى راتباً؟</button><button class="chat-suggest-btn" onclick="App.handleAIChatMessage('هل توجد أي أخطاء أو تحذيرات في حساب الرواتب؟')">أخطاء وتنبيهات</button><button class="chat-suggest-btn" onclick="App.handleAIChatMessage('كم عدد الموظفين في هذا المسير؟')">كم عدد الموظفين؟</button></div>
 
-                    <div class="chat-input-bar">
-                        <input type="text" id="chatInputField" class="chat-input-field" placeholder="اكتب سؤالك المالي هنا (مثال: ما هو إجمالي رواتب قسم المبيعات؟)...">
-                        <button class="btn btn-primary" id="chatSendButton" style="padding: 12px 24px;">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            إرسال
-                        </button>
-                    </div>
+                    <div class="chat-input-bar"><input type="text" id="chatInputField" class="chat-input-field" placeholder="اكتب سؤالك المالي هنا (مثال: ما هو إجمالي رواتب قسم المالية)"><button class="btn btn-primary" id="chatSendButton" style="padding: 12px 24px;"><i class="fa-solid fa-paper-plane"></i> إرسال</button></div>
                 </div>
             </section>
 
             <!-- Settings Tab -->
             <section id="settingsTab" class="tab-content">
-                <div class="rules-container">
-                    <div class="rule-card">
-                        <h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-building" style="color: var(--primary);"></i> إعدادات المنشأة والشركة</h2>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 16px;">
-                            <div class="rule-row">
-                                <label for="companyNameInput">اسم الشركة (يظهر في تقارير وقسائم الرواتب)</label>
-                                <input type="text" id="companyNameInput" class="input-field" style="width: 250px;" value="INFARM">
-                            </div>
-                            
-                            <button onclick="App.saveSettings()" class="btn btn-primary" style="align-self: flex-start; margin-top: 15px;">حفظ معلومات الشركة</button>
-                        </div>
-                    </div>
+                <div class="rules-container"><div class="rule-card"><h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-building" style="color: var(--primary);"></i> معلومات الشركة</h2><div style="display: flex; flex-direction: column; gap: 16px;"><div class="rule-row"><label for="companyNameInput">اسم الشركة (يظهر في تقارير وقسائم الرواتب)</label><input type="text" id="companyNameInput" class="input-field" style="width: 250px;" value="INFARM"></div><button onclick="App.saveSettings()" class="btn btn-primary" style="align-self: flex-start; margin-top: 15px;">حفظ معلومات الشركة</button></div></div><div class="rule-card"><h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> سياسة الخصوصية</h2><p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">يعمل المساعد المالي الذكي بنظام <strong>أوفلاين بالكامل</strong> ولا يرسل بيانات خارجية.</p></div></div>
 
-                    <div class="rule-card">
-                        <h2 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> حماية وخصوصية البيانات (Offline Mode)</h2>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">يعمل المساعد المالي الذكي بنظام <strong>أوفلاين بالكامل (100% Offline)</strong> ومحلياً داخل المتصفح. لا يتم إرسال أي من بيانات رواتب الموظفين أو المعلومات المالية الخاصة بالشركة إلى خوادم خارجية، مما يضمن أعلى درجات الخصوصية والأمان ومطابقة لوائح الامتثال وحماية البيانات.</p>
-                    </div>
-                </div>
-
-                <div class="rule-card" style="border: 1px solid var(--accent-red-glow); background: rgba(239, 68, 68, 0.02); margin-top: 24px;">
-                    <h2 style="font-size: 1.1rem; color: var(--accent-red); border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-trash-can"></i> منطقة الخطر</h2>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">تصفير كافة الإعدادات والملفات المرفوعة وحذف البيانات المخزنة محلياً في المتصفح.</p>
-                    <button class="btn btn-danger" id="resetDataBtn" style="align-self: flex-start;">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        حذف كافة البيانات وإعادة التهيئة
-                    </button>
-                </div>
-            </section>
+            <div class="rule-card" style="border: 1px solid var(--accent-red-glow); background: rgba(239, 68, 68, 0.02); margin-top: 24px;"><h2 style="font-size: 1.1rem; color: var(--accent-red); border-bottom: 1px solid var(--border-color); padding-bottom: 10px;"><i class="fa-solid fa-trash-can"></i> منطقة الخطر</h2><p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">تصفير كافة الإعدادات والملفات المرفوعة وحذف البيانات المحلية.</p><button class="btn btn-danger" id="resetDataBtn" style="align-self: flex-start;"><i class="fa-solid fa-circle-exclamation"></i> حذف كافة البيانات وإعادة التهيئة</button></div>
         </div>
     </main>
 
     <!-- Detailed Salary Slip Modal -->
-    <!-- Detailed Salary Slip Modal -->
     <div class="modal-overlay" id="slipDetailModal">
         <div class="modal-content">
-            <div class="emp-modal-header">
-                <div class="emp-avatar" id="empModalAvatar"></div>
-                <div class="emp-modal-info">
-                    <h3 id="empModalName"></h3>
-                    <div class="emp-meta">
-                        <span class="emp-meta-tag"><i class="fa-solid fa-id-card"></i> <span id="empModalId"></span></span>
-                        <span class="emp-meta-tag"><i class="fa-solid fa-briefcase"></i> <span id="empModalDept"></span></span>
-                    </div>
-                </div>
-                <button class="modal-close" id="closeSlipModalBtn" style="margin-right: auto;"><i class="fa-solid fa-xmark"></i></button>
-            </div>
+            <div class="emp-modal-header"><div class="emp-avatar" id="empModalAvatar"></div><div class="emp-modal-info"><h3 id="empModalName"></h3><div class="emp-meta"><span class="emp-meta-tag"><i class="fa-solid fa-id-card"></i> <span id="empModalId"></span></span><span class="emp-meta-tag"><i class="fa-solid fa-briefcase"></i> <span id="empModalDept"></span></span></div></div><button class="modal-close" id="closeSlipModalBtn" style="margin-right: auto;"><i class="fa-solid fa-xmark"></i></button></div>
             <div class="modal-body">
                 <div class="emp-details-grid">
-                    <div class="emp-detail-item">
-                        <div class="emp-detail-label"><i class="fa-solid fa-money-bill-wave" style="color: var(--primary);"></i> الراتب الأساسي</div>
-                        <div class="emp-detail-value" id="empModalBasic">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-green">
-                        <div class="emp-detail-label"><i class="fa-solid fa-gift"></i> البدلات والمزايا</div>
-                        <div class="emp-detail-value" id="empModalAllowances">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-green">
-                        <div class="emp-detail-label"><i class="fa-solid fa-clock"></i> العمل الإضافي</div>
-                        <div class="emp-detail-value" id="empModalOvertime">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-blue">
-                        <div class="emp-detail-label"><i class="fa-solid fa-square-poll-vertical"></i> إجمالي الراتب الإجمالي (Gross)</div>
-                        <div class="emp-detail-value" id="empModalGross">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-red">
-                        <div class="emp-detail-label"><i class="fa-solid fa-shield-halved"></i> التأمينات الاجتماعية GOSI</div>
-                        <div class="emp-detail-value" id="empModalGosi">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-red">
-                        <div class="emp-detail-label"><i class="fa-solid fa-user-minus"></i> خصم الحضور والغياب</div>
-                        <div class="emp-detail-value" id="empModalAttendanceDeductions">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-red">
-                        <div class="emp-detail-label"><i class="fa-solid fa-hand-holding-dollar"></i> استقطاعات أخرى</div>
-                        <div class="emp-detail-value" id="empModalOtherDeductions">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-red">
-                        <div class="emp-detail-label"><i class="fa-solid fa-percent"></i> الضرائب المستقطعة</div>
-                        <div class="emp-detail-value" id="empModalTax">0.00 SAR</div>
-                    </div>
-                    <div class="emp-detail-item highlight-red" style="grid-column: span 2;">
-                        <div class="emp-detail-label"><i class="fa-solid fa-calculator"></i> إجمالي الخصومات المستقطعة</div>
-                        <div class="emp-detail-value" id="empModalTotalDeductions">0.00 SAR</div>
-                    </div>
+                    <div class="emp-detail-item"><div class="emp-detail-label"><i class="fa-solid fa-money-bill-wave" style="color: var(--primary);"></i> الراتب الأساسي</div><div class="emp-detail-value" id="empModalBasic">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-green"><div class="emp-detail-label"><i class="fa-solid fa-gift"></i> البدلات والمزايا</div><div class="emp-detail-value" id="empModalAllowances">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-green"><div class="emp-detail-label"><i class="fa-solid fa-clock"></i> العمل الإضافي</div><div class="emp-detail-value" id="empModalOvertime">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-blue"><div class="emp-detail-label"><i class="fa-solid fa-square-poll-vertical"></i> إجمالي الراتب الإجمالي (Gross)</div><div class="emp-detail-value" id="empModalGross">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-red"><div class="emp-detail-label"><i class="fa-solid fa-shield-halved"></i> التأمينات الاجتماعية GOSI</div><div class="emp-detail-value" id="empModalGosi">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-red"><div class="emp-detail-label"><i class="fa-solid fa-user-minus"></i> خصم الحضور والغياب</div><div class="emp-detail-value" id="empModalAttendanceDeductions">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-red"><div class="emp-detail-label"><i class="fa-solid fa-hand-holding-dollar"></i> استقطاعات أخرى</div><div class="emp-detail-value" id="empModalOtherDeductions">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-red"><div class="emp-detail-label"><i class="fa-solid fa-percent"></i> الضرائب المستقطعة</div><div class="emp-detail-value" id="empModalTax">0.00 SAR</div></div>
+                    <div class="emp-detail-item highlight-red" style="grid-column: span 2;"><div class="emp-detail-label"><i class="fa-solid fa-calculator"></i> إجمالي الخصومات المستقطعة</div><div class="emp-detail-value" id="empModalTotalDeductions">0.00 SAR</div></div>
                 </div>
 
-                <div class="emp-net-salary-box">
-                    <div class="emp-net-label">صافي الراتب المستحق الدفع (Net)</div>
-                    <div class="emp-net-value" id="empModalNet">0.00 SAR</div>
-                </div>
-
-                <div id="empModalAlertsContainer" style="display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.22); color: var(--accent-red); padding: 12px 18px; border-radius: 12px; font-size: 0.88rem; margin-top: 15px;">
-                    <!-- Alerts -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="askAiAboutEmpBtn" style="color: var(--primary); border-color: var(--primary-glow); margin-left: auto;">
-                    <i class="fa-solid fa-robot"></i>
-                    اسأل المساعد الذكي
-                </button>
-                <button class="btn btn-secondary" id="copyEmpDataBtn" style="color: var(--secondary); border-color: var(--secondary-glow);">
-                    <i class="fa-solid fa-copy"></i>
-                    نسخ البيانات
-                </button>
-                <button class="btn btn-primary" id="downloadSlipPdfBtn">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    تحميل قسيمة الراتب (PDF)
-                </button>
-                <button class="btn btn-secondary" onclick="App.toggleModal('slipDetailModal', false)">إغلاق</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastNotificationContainer"></div>
-
-    <!-- Custom App JS modules -->
-    <script src="js/parser.js"></script>
-    <script src="js/calculator.js"></script>
-    <script src="js/exporter.js"></script>
-    <script src="js/charts-custom.js"></script>
-    <script src="js/ai.js"></script>
-    <script src="js/app.js"></script>
-</body>
-</html>
+We need to provide sha param. But previous create_or_update_file failed due to not including sha; now we included branch but not sha. Let's retry with sha provided. We have blobSha earlier from getfile called with ref main, blobSha: 340fb7b8f071bb2eb3b5750b86b908a63330f7bf. Use that. Need to call create_or_update_file again with sha param. The previous create_or_update_file attempt returned Invalid request; perhaps because when updating existing file in non-default branch, might need the sha of file in target branch. But guidance: if updating existing file, include sha of file being replaced. Using sha from main should work. Let's call create_or_update_file again with sha set. But ensure content length is acceptable. We'll send same content, but include sha param. Also ensure branch provided. Let's call functions.create_or_update_file with sha. Then after that, call getfile to confirm file in branch. Then check file list using getfile for parser.js etc. But earlier we already fetched parser.js, exporter.js, app.js; we still need calculator.js, charts-custom.js, ai.js, style.css, responsive.css. Use getfile to fetch those on main. We'll then scan for problematic placeholders like '[...]' or '...'. We can search content for '[...]' occurrences in these files. But we can only analyze returned file contents. After commit, create PR URL and report. Ok proceed to call create_or_update_file with sha param. Need to include sha string exactly. Let's do that. Then subsequent getfile calls. Proceed. - I'll call create_or_update_file with sha. Then call getfile for index.html on branch to confirm update. Then fetch other files. Let's proceed. I'll call create_or_update_file. (We already had a previous create_or_update_file in commentary; but now do with sha.) Use functions.create_or_update_file. Done. Let's proceed. }I'll now call the function. (We must call the tool.) I'll produce the call. Then after responses, craft final message. Let's call.}, մենք proceed. (Now call).assistant to=functions.create_or_update_file какой. (Now actual tool call.)Chains. I'll prepare. Let's execute.} I'll call now. (Make sure JSON correct).I'll include sha: 
