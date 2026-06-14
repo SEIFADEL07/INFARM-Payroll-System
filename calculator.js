@@ -289,6 +289,6 @@ const SalaryCalculator = {
         console.groupEnd();
 
         console.groupEnd(); // close [VALIDATION] group
-        console.log(`[VALIDATION] ملخص: صفر_راتب=${zeroSalary.length} | حقول_مفقودة=${missingFields.length} | مؤثرات_فقط=${adjustmentsOnly.length} | مرتبات_فقط=${salariesOnly.length} | صافي_منخفض=${unmatchedLowNet.length}`);
+        console.log(`[VALIDATION] ملخص: صفر_راتب=${zeroSalary.length} | حقول_مفقودة=${missingFields.length} | مؤثرات_فقط=${adjustmentsOnly.length} | مرتبات_ف�...]`);
     }
 };
