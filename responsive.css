@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+@media (max-width: 1024px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 0px;
+        --header-height: 100px;
+    }
+
+    body {
+        flex-direction: column;
+    }
+
+    /* Enterprise Header — mobile */
+    .company-header {
+        right: 0 !important;
+        padding: 0 14px !important;
+        height: var(--header-height) !important;
+    }
+
+    .company-header-inner {
+        gap: 12px !important;
+    }
+
+
+    .ch-company-name {
+        font-size: 1.3rem !important;
+        letter-spacing: 0.08em !important;
+    }
+
+    .ch-subtitle {
+        display: none !important;
+    }
+
+    .ch-right {
+        border-left: 1px solid rgba(16, 185, 129, 0.2) !important;
+        padding-left: 12px !important;
+    }
+
+    .ch-founder-label {
+        font-size: 0.55rem !important;
+    }
+
+    .ch-founder-name {
+        font-size: 0.82rem !important;
+    }
+
+    /* Sidebar shifts down */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 14px;
+        margin-top: var(--header-height);
+    }
+
+    .brand {
+        margin-bottom: 12px;
+        justify-content: center;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        gap: 6px;
+        justify-content: flex-start;
+    }
+
+    .nav-item a {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        white-space: nowrap;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-wrapper {
+        margin-right: 0;
+        width: 100%;
+        padding: 16px;
+        gap: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 14px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .controls-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+    }
+
+    .filters-group {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .rules-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* KPI Cards — 2-col grid */
+    .kpi-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    .kpi-card {
+        padding: 14px !important;
+        border-radius: 14px !important;
+    }
+
+    .kpi-info h3 {
+        font-size: 0.7rem !important;
+        margin-bottom: 6px !important;
+    }
+
+    .kpi-info .kpi-value {
+        font-size: 1.2rem !important;
+    }
+
+    .kpi-icon {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1rem !important;
+        border-radius: 10px !important;
+    }
+
+    /* Smart Assistant mobile */
+    .chat-container-panel {
+        height: 480px !important;
+    }
+
+    .chat-msg {
+        max-width: 92%;
+        padding: 10px 14px !important;
+        font-size: 0.85rem !important;
+    }
+
+    .chat-suggestions {
+        padding: 6px 12px !important;
+    }
+
+    .chat-suggest-btn {
+        padding: 4px 10px !important;
+        font-size: 0.73rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Employee details modal stacks to single column */
+    .emp-details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .emp-detail-item {
+        grid-column: span 1 !important;
+        padding: 10px 12px !important;
+    }
+
+    .emp-net-salary-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 14px !important;
+    }
+
+    .emp-net-value {
+        font-size: 1.5rem !important;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
