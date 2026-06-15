@@ -273,15 +273,15 @@ const Exporter = {
                 <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.75rem;">
                     <thead>
                         <tr style="background: #059669; color: white;">
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: center; width: 80px;">الرقم الوظيفي</th>
-                            <th style="padding: 8px; border: 1px solid #059669;">اسم الموظف</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: center;">القسم</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: left;">الأساسي</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: left;">البدلات</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: left;">الإضافي</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: left;">خصم غياب</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: left;">الاستقطاعات الإجمالية</th>
-                            <th style="padding: 8px; border: 1px solid #059669; text-align: left;">صافي الراتب</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align: center; width: 80px;">الرقم<br>الوظيفي</th>
+                            <th style="padding: 8px; border: 1px solid #059669;">اسم<br>الموظف</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:center;">القسم</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:left;">الأساسي</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:left;">البدلات</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:left;">الإضافي</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:left;">خصم<br>غيب</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:left;">الاستقطاعات<br>الإجمالية</th>
+                            <th style="padding: 8px; border: 1px solid #059669; text-align:left;">صافي<br>الراتب</th>
                         </tr>
                     </thead>
                     <tbody>

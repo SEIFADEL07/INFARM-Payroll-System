@@ -357,13 +357,41 @@ const PayrollEngine = {
     },
 
     // ─── Individual Salary Slip PDF Generation (Requirement 1) ─────────────
-    generateSlipHTML: async function(emp, companyName, monthKey) {
-        const monthLabel = this.getMonthLabel(monthKey);
-        const logoUrl = await Exporter.getLogoDataUrl();
-        const containerStyle = "font-family:'Cairo',Arial,sans-serif;padding:4px;background:#fff;color:#1e293b;width:100%;box-sizing:border-box;page-break-inside:avoid;";
-        const innerBoxStyle = "border:2px solid #10b981;border-radius:12px;padding:8px;box-shadow:0 2px 6px rgba(0,0,0,0.03);page-break-inside:avoid;box-sizing:border-box;width:100%;";
-        const headerFlexStyle = "display:flex;justify-content:space-between;align-items:center;padding-bottom:4px;";
-        const titleRowStyle = "display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;";
+    
+        generateSlipHTML: async function(emp, companyName, monthKey) {
+            // Guard against null/undefined employee objects
+            if (!emp) {
+                console.warn('[PayrollEngine] generateSlipHTML called with null employee');
+                return '';
+            }
+
+            const monthLabel = this.getMonthLabel(monthKey);
+            const logoUrl = await Exporter.getLogoDataUrl();
+
+            // Compute earnings and deductions from source data (no hard‑coded values)
+            const basic = Number(emp.basicSalary) || 0;
+            const allowances = Number(emp.allowances) || 0;
+            const overtime = Number(emp.overtime) || 0;
+            const otherEarnings = Number(emp.otherEarnings) || 0;
+            const totalEarnings = basic + allowances + overtime + otherEarnings;
+
+            const attendance = Number(emp.attendanceDeductions) || 0;
+            const otherDeductions = Number(emp.otherDeductions) || 0;
+            const social = Number(emp.calculatedSocialSecurity) || 0;
+            const taxes = Number(emp.calculatedTaxes) || 0;
+            const deductions = Number(emp.deductions) || 0;
+            const totalDeductions = attendance + otherDeductions + social + taxes + deductions;
+
+            const netSalary = totalEarnings - totalDeductions;
+            // Use computed netSalary for display, ensuring formula consistency
+            const displayedNet = netSalary.toFixed(2);
+
+            // Compact styling – reduce paddings, use flex layout, avoid page breaks
+            const containerStyle = "font-family:'Cairo',Arial,sans-serif;padding:6px;background:#fff;color:#1e293b;width:100%;box-sizing:border-box;margin:0 auto;max-width:650px;page-break-inside:avoid;";
+            const headerFlexStyle = "display:flex;justify-content:space-between;align-items:center;padding-bottom:4px;";
+            const innerBoxStyle = "padding:8px;box-sizing:border-box;";
+            const titleRowStyle = "display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;";
+
         const infoGridStyle = "display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px;margin-bottom:8px;font-size:0.75rem;box-sizing:border-box;";
         const sectionHeaderStyle = "background:#ecfdf5;font-weight:bold;";
         const rowStyleEven = "background:#f8fafc;";
@@ -386,7 +414,7 @@ const PayrollEngine = {
                     <p style="color:#64748b;font-size:0.75rem;margin:0;">شهر: ${monthLabel}</p>
                 </div>
                 <div style="${infoGridStyle}">
-                    <div><strong>كود الموظف:</strong> ${HtmlSafety.escape(emp.employeeId || '#EMP' + String(emp.id).padStart(4, '0'))}</div>
+                    <div><strong>الرقم الوظيفي:</strong> ${HtmlSafety.escape(emp.employeeId || '#EMP' + String(emp.id).padStart(4, '0'))}</div>
                     <div><strong>اسم الموظف:</strong> ${HtmlSafety.escape(emp.name)}</div>
                 </div>
 
@@ -407,7 +435,7 @@ const PayrollEngine = {
                         <tr><td style="padding:10px 12px; border:1px solid #e2e8f0; color:#ef4444;">(-) الضرائب المستقطعة</td><td style="padding:10px 12px; border:1px solid #e2e8f0; text-align:left; color:#ef4444;">${emp.calculatedTaxes.toFixed(2)}</td></tr>
                         <tr style="font-weight:bold; font-size:1.1rem; border-top:2px solid #10b981;">
                             <td style="padding:12px; border:1px solid #10b981; background:#ecfdf5; color:#047857;">صافي الراتب المستحق الدفع (Net)</td>
-                            <td style="padding:12px; border:1px solid #10b981; text-align:left; background:#ecfdf5; color:#047857;">${emp.calculatedNet.toFixed(2)} SAR</td>
+                            <td style="padding:12px; border:1px solid #10b981; text-align:left; background:#ecfdf5; color:#047857;">${displayedNet} SAR</td>
                         </tr>
                     </tbody>
                 </table>
@@ -443,6 +471,27 @@ const PayrollEngine = {
      * Records to archive.
      */
     generateSingleSlip: async function(emp, companyName, monthKey) {
+        // Guard against null/undefined employee objects; provide default empty employee to ensure slip generation
+        if (!emp) {
+            console.warn('[PayrollEngine] generateSingleSlip received null employee, using defaults');
+            emp = {
+                employeeId: '',
+                id: '',
+                name: '',
+                basicSalary: 0,
+                allowances: 0,
+                overtime: 0,
+                otherEarnings: 0,
+                attendanceDeductions: 0,
+                otherDeductions: 0,
+                calculatedSocialSecurity: 0,
+                calculatedTaxes: 0,
+                deductions: 0,
+                calculatedNet: 0,
+                grossSalary: 0,
+                validationAlerts: []
+            };
+        }
         monthKey = monthKey || this.getCurrentPayrollMonth();
         const html = await this.generateSlipHTML(emp, companyName, monthKey);
         const tempDiv = document.createElement('div');
