@@ -360,49 +360,44 @@ const PayrollEngine = {
     generateSlipHTML: async function(emp, companyName, monthKey) {
         const monthLabel = this.getMonthLabel(monthKey);
         const logoUrl = await Exporter.getLogoDataUrl();
-
-        const empCode = emp.employeeId || '#EMP' + String(emp.id).padStart(4, '0');
-        const validColor = emp.validationStatus === 'valid' ? '#10b981'
-            : emp.validationStatus === 'warning' ? '#f59e0b' : '#ef4444';
-        const validLabel = emp.validationStatus === 'valid' ? 'مطابق'
-            : emp.validationStatus === 'warning' ? 'تحذير' : 'خطأ في الحساب';
+        const containerStyle = "font-family:'Cairo',Arial,sans-serif;padding:4px;background:#fff;color:#1e293b;width:100%;box-sizing:border-box;page-break-inside:avoid;";
+        const innerBoxStyle = "border:2px solid #10b981;border-radius:12px;padding:8px;box-shadow:0 2px 6px rgba(0,0,0,0.03);page-break-inside:avoid;box-sizing:border-box;width:100%;";
+        const headerFlexStyle = "display:flex;justify-content:space-between;align-items:center;padding-bottom:4px;";
+        const titleRowStyle = "display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;";
+        const infoGridStyle = "display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px;margin-bottom:8px;font-size:0.75rem;box-sizing:border-box;";
+        const sectionHeaderStyle = "background:#ecfdf5;font-weight:bold;";
+        const rowStyleEven = "background:#f8fafc;";
+        const cellStyle = "padding:4px 6px;border:1px solid #e2e8f0;";
+        const cellBoldStyle = "font-weight:bold;";
+        const totalRowStyle = "font-weight:bold;border-top:2px solid #cbd5e1;background:#e2e8f0;";
+        const totalDeductionRowStyle = "font-weight:bold;background:#fee2e2;border-top:2px solid #cbd5e1;";
+        const netRowStyle = "font-weight:bold;font-size:1rem;border-top:3px solid #10b981;";
 
         return `
-        <div dir="rtl" style="font-family: 'Cairo', Arial, sans-serif; padding: 30px; background: #fff; color: #1e293b;">
-            <div style="border: 2px solid #10b981; border-radius: 16px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px;">
-                    <div style="text-align: right;">
-                        <span style="font-size: 1.8rem; font-weight: 900; color: #059669;">${HtmlSafety.escape(companyName || 'INFARM')}</span>
-                    </div>
-                    <div style="height: 50px; display: flex; align-items: center;">
-                        ${logoUrl ? `<img src="${logoUrl}" style="max-height:50px; width:auto; object-fit:contain;" />` : ''}
-                    </div>
+        <div dir="rtl" style="${containerStyle}">
+            <div style="${innerBoxStyle}">
+                <div style="${headerFlexStyle}">
+                    <div><span style="font-size:1.4rem;font-weight:900;color:#059669;">${HtmlSafety.escape(companyName || 'INFARM')}</span></div>
+                    <div style="height:30px;display:flex;align-items:center;">${logoUrl ? `<img src="${logoUrl}" style="max-height:30px;width:auto;object-fit:contain;"/>` : ''}</div>
                 </div>
-                <div style="border-bottom: 2px solid #10b981; margin-bottom: 20px;"></div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 style="color: #1e293b; font-size: 1.2rem; font-weight: 700; margin: 0;">قسيمة راتب الموظف</h2>
-                    <div style="text-align: left;">
-                        <p style="color: #64748b; font-size: 0.9rem; margin: 0;">شهر: ${monthLabel}</p>
-                    </div>
+                <div style="border-bottom:2px solid #10b981;margin-bottom:8px;"></div>
+                <div style="${titleRowStyle}">
+                    <h2 style="color:#1e293b;font-size:0.95rem;font-weight:700;margin:0;">قسيمة راتب الموظف</h2>
+                    <p style="color:#64748b;font-size:0.75rem;margin:0;">شهر: ${monthLabel}</p>
                 </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 24px; font-size: 0.9rem;">
-                    <div><strong>كود الموظف:</strong> ${HtmlSafety.escape(empCode)}</div>
+                <div style="${infoGridStyle}">
+                    <div><strong>كود الموظف:</strong> ${HtmlSafety.escape(emp.employeeId || '#EMP' + String(emp.id).padStart(4, '0'))}</div>
                     <div><strong>اسم الموظف:</strong> ${HtmlSafety.escape(emp.name)}</div>
-                    <div><strong>القسم / الإدارة:</strong> ${HtmlSafety.escape(emp.department)}</div>
-                    <div><strong>حالة التدقيق:</strong> <span style="font-weight: bold; color: ${validColor};">${validLabel}</span></div>
                 </div>
 
-                <table style="width:100%; border-collapse: collapse; margin-bottom: 24px; text-align: right; font-size: 0.9rem;">
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;text-align:right;font-size:0.75rem;box-sizing:border-box;">
                     <thead>
-                        <tr style="background: #10b981; color: white;">
-                            <th style="padding: 10px 12px; border: 1px solid #10b981;">البند / تفاصيل الراتب</th>
-                            <th style="padding: 10px 12px; border: 1px solid #10b981; text-align: left;">المبلغ (SAR)</th>
+                        <tr style="${sectionHeaderStyle}">
+                            <th style="${cellStyle} line-height:1.2;">البند /<br>تفاصيل</th>
+                            <th style="${cellStyle} text-align:left;">المبلغ (SAR)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td style="padding:10px 12px; border:1px solid #e2e8f0;">الراتب الأساسي</td><td style="padding:10px 12px; border:1px solid #e2e8f0; text-align:left;">${emp.basicSalary.toFixed(2)}</td></tr>
                         <tr style="background:#f8fafc;"><td style="padding:10px 12px; border:1px solid #e2e8f0; color:#059669;">(+) البدلات والمزايا</td><td style="padding:10px 12px; border:1px solid #e2e8f0; text-align:left; color:#059669;">${emp.allowances.toFixed(2)}</td></tr>
                         <tr style="background:#f8fafc;"><td style="padding:10px 12px; border:1px solid #e2e8f0; color:#059669;">(+) العمل الإضافي</td><td style="padding:10px 12px; border:1px solid #e2e8f0; text-align:left; color:#059669;">${(emp.overtime||0).toFixed(2)}</td></tr>
                         <tr style="font-weight:bold; border-top:1px solid #cbd5e1;"><td style="padding:10px 12px; border:1px solid #cbd5e1; background:#e2e8f0;">إجمالي الراتب الإجمالي (Gross)</td><td style="padding:10px 12px; border:1px solid #cbd5e1; text-align:left; background:#e2e8f0;">${emp.grossSalary.toFixed(2)}</td></tr>
