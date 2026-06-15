@@ -803,6 +803,87 @@
         </div>
     </div>
 
+    <!-- Registry Import Preview Modal (Requirement 2) -->
+    <div class="modal-overlay" id="registryImportPreviewModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="emp-modal-header">
+                <div class="brand-logo" style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--primary-grad); color: white; font-size: 1.1rem;">
+                    <i class="fa-solid fa-file-import"></i>
+                </div>
+                <div class="emp-modal-info" style="margin-right: 12px; margin-left: 0;">
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">معاينة استيراد الموظفين</h3>
+                    <div class="emp-meta">
+                        <span class="emp-meta-tag"><i class="fa-solid fa-users"></i> إجمالي الموظفين: <span id="previewCount">0</span></span>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="App.toggleModal('registryImportPreviewModal', false)" style="margin-right: auto;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 20px 0;">
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">يرجى مراجعة قائمة الموظفين المستخرجة من ملف PDF قبل حفظها في سجل الموظفين:</p>
+                <div style="max-height: 300px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.15);">
+                    <table class="custom-table" style="margin: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 10px;">كود الموظف</th>
+                                <th style="padding: 10px;">اسم الموظف</th>
+                            </tr>
+                        </thead>
+                        <tbody id="previewTableBody">
+                            <!-- Rows loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: flex-end; gap: 10px;">
+                <button class="btn btn-secondary" onclick="App.toggleModal('registryImportPreviewModal', false)">إلغاء الاستيراد</button>
+                <button class="btn btn-primary" id="confirmRegistryImportBtn">تأكيد الاستيراد</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Possible Match Found Modal (Requirement 4) -->
+    <div class="modal-overlay" id="registryMergeConflictModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="emp-modal-header" style="border-bottom: 1px solid rgba(245, 158, 11, 0.2);">
+                <div class="brand-logo" style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 1.1rem;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="emp-modal-info" style="margin-right: 12px; margin-left: 0;">
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">تم العثور على مطابقة محتملة بالاسم</h3>
+                    <div class="emp-meta">
+                        <span class="emp-meta-tag" style="color: #f59e0b;"><i class="fa-solid fa-circle-info"></i> تطابق اسم محتمل</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding: 20px 0;">
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">قد يكون هذا الموظف مسجلاً بالفعل باسم مشابه في سجل الموظفين:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                    <!-- Existing Employee -->
+                    <div style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 10px; background: rgba(255,255,255,0.03);">
+                        <strong style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-bottom: 4px;">الموظف الحالي في السجل (Existing Employee):</strong>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);"><span id="conflictExistingCode"></span> | <span id="conflictExistingName"></span></div>
+                    </div>
+                    
+                    <!-- Arrow down -->
+                    <div style="text-align: center; color: #f59e0b; font-size: 1.2rem;">
+                        <i class="fa-solid fa-arrows-up-down"></i>
+                    </div>
+
+                    <!-- Imported Employee -->
+                    <div style="padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 10px; background: rgba(255,255,255,0.03);">
+                        <strong style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-bottom: 4px;">الموظف المستورد (Imported Employee):</strong>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);"><span id="conflictImportedCode"></span> | <span id="conflictImportedName"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: flex-end; gap: 10px; border-top: none; padding-top: 0;">
+                <button class="btn btn-secondary" id="conflictKeepSeparateBtn" style="border-color: var(--border-color); color: var(--text-main);">إبقاء منفصلين (Keep Separate)</button>
+                <button class="btn btn-primary" id="conflictMergeBtn" style="background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: white;">دمج الموظفين (Merge Employees)</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Detailed Salary Slip Modal -->
     <!-- Detailed Salary Slip Modal -->
     <div class="modal-overlay" id="slipDetailModal">

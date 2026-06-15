@@ -79,10 +79,74 @@ const IdentityResolver = {
         }
     },
 
+    // Name similarity intelligence (Requirement 4)
+    areNamesSimilar: function(name1, name2) {
+        if (!name1 || !name2) return false;
+        const norm1 = this.normalizeName(name1);
+        const norm2 = this.normalizeName(name2);
+        if (norm1 === norm2) return true;
+
+        const words1 = norm1.split(' ').filter(w => w.length > 0);
+        const words2 = norm2.split(' ').filter(w => w.length > 0);
+
+        if (words1.length === 0 || words2.length === 0) return false;
+
+        const [shorter, longer] = words1.length < words2.length ? [words1, words2] : [words2, words1];
+
+        // Check if shorter is a sequential sub-sequence of longer
+        let matchCount = 0;
+        let sIdx = 0;
+        for (let lIdx = 0; lIdx < longer.length; lIdx++) {
+            if (longer[lIdx] === shorter[sIdx]) {
+                matchCount++;
+                sIdx++;
+                if (sIdx === shorter.length) break;
+            }
+        }
+
+        if (matchCount === shorter.length) {
+            return true;
+        }
+
+        // Check overlap fraction
+        let overlap = 0;
+        const setLonger = new Set(longer);
+        shorter.forEach(w => {
+            if (setLonger.has(w)) overlap++;
+        });
+
+        if (overlap >= 2 && (overlap / shorter.length) >= 0.66) {
+            return true;
+        }
+
+        return false;
+    },
+
     // Resolve an identity without silently choosing duplicate or conflicting records.
     resolveDetailed: function(empCode, empName, indexes) {
         const cleanCode = empCode ? String(empCode).trim() : '';
         const normName = this.normalizeName(empName);
+
+        // Check User-confirmed matches first (Requirement 5)
+        try {
+            const confirmedMatches = JSON.parse(localStorage.getItem('hr_user_confirmed_matches') || '[]');
+            for (const decision of confirmedMatches) {
+                if (decision.action === 'merge') {
+                    const isCodeMatch = cleanCode && decision.importedCode === cleanCode;
+                    const isNameMatch = normName && this.normalizeName(decision.importedName) === normName;
+                    if (isCodeMatch || isNameMatch) {
+                        const existingCode = String(decision.existingCode).trim();
+                        const matched = indexes.byCode.get(existingCode);
+                        if (matched && matched.length === 1) {
+                            return { status: 'matched', entry: matched[0], matchedBy: 'user_confirmed', message: '' };
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.error('[IdentityResolver] Failed to load user confirmed matches:', e);
+        }
+
         const codeMatches = cleanCode ? (indexes.byCode.get(cleanCode) || []) : [];
         const nameMatches = normName ? (indexes.byName.get(normName) || []) : [];
 
